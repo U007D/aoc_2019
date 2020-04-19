@@ -1,19 +1,20 @@
-use crate::consts::msg;
-use std::ffi::OsString;
+mod io_error;
+use io_error::IoError;
+use std::io;
 use thiserror::Error;
 
-/// In an application setting, an `Error` is an `enum` (as opposed to a newtype in a library
-/// context).  This simplifies its definition and use, as it is not going to be consumed externally.
-#[derive(Debug, Error)]
+#[derive(Debug, Error, PartialEq)]
 pub enum Error {
-    #[error("{}: {:?}", msg::ERR_ARG_NOT_CONVERTIBLE_TO_UTF_8, 0)]
-    ArgNotConvertibleToUtf8(/*#[from]*/ std::ffi::OsString),
+    #[error("Invalid `day` argument specified.  Please enter a number between 1 and 25")]
+    InvalidDayArgument,
+    #[error("IO Error")]
+    IoError(#[from] IoError),
+    #[error("Error parsing string into a numeric value")]
+    AttemptedToParseNonNumericString(#[from] std::num::ParseIntError),
 }
 
-// TODO: Remove this `From` impl and uncomment `#[from]` attribute above when
-//       [`thiserror` issue](https://github.com/dtolnay/thiserror/issues/51) is resolved.
-impl From<std::ffi::OsString> for Error {
-    fn from(err: OsString) -> Self {
-        Self::ArgNotConvertibleToUtf8(err)
+impl From<io::Error> for Error {
+    fn from(io_error: io::Error) -> Self {
+        Error::IoError(io_error.into())
     }
 }

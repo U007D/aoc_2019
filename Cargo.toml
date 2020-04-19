@@ -12,6 +12,8 @@ version = "0.1.0"
 [dependencies]
 pico-args = "0.3.0"
 thiserror = "1.0.6"
+structopt = "0.3.13"
+num-traits = "0.2.11"
 
 [profile.dev]
 codegen-units = 1

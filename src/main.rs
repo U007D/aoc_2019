@@ -16,18 +16,16 @@
 // Uncomment before ship to reconcile use of possibly redundant crates, debug remnants, missing license files and more
 //#![warn(clippy::cargo, clippy::restriction, missing_docs, warnings)]
 //#![deny(warnings)]
+mod option_ext;
 
-mod consts;
-mod error;
-
-use pico_args::Arguments;
-pub use {consts::*, error::Error};
-
-pub type Result<T, E = Error> = std::result::Result<T, E>;
+use aoc2019::{Args, Result};
+use option_ext::OptionExt;
+use structopt::StructOpt;
 
 fn main() -> Result<()> {
-    // see examples/pico_args.rs for argument parsing example
-    let _args_parser = Arguments::from_env();
+    let args = Args::from_args();
+    let res = aoc2019::aoc(args.day, args.input_data_file.try_into()?)?;
+    println!("{}", res);
 
     Ok(())
 }

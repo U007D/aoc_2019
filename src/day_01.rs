@@ -1,14 +1,22 @@
-use crate::Result;
-use std::io::{BufRead, BufReader, Read};
+use crate::{Input, Result};
 
-pub fn day_01(mut input: BufReader<Box<dyn Read>>) -> Result<u64> {
-    let mut buf = String::new();
-    let mut acc = 0;
-    while input.read_line(&mut buf)? > 0 {
-        acc += match buf.trim().parse::<u64>()? / 3 {
-            val if val > 2 => val - 2,
-            _ => 0,
-        };
+pub fn day_01(input: Input) -> Result<(u64, u64)> {
+    Ok((part_1(input.iter()), part_2(input.iter())))
+}
+
+fn part_1<'a, I: Iterator<Item = &'a u64>>(iter: I) -> u64 {
+    iter.fold(0, |acc, value| acc + (value / 3).saturating_sub(2))
+}
+
+fn part_2<'a, I: Iterator<Item = &'a u64>>(iter: I) -> u64 {
+    fn self_compensating_fuel_mass(mass: u64) -> u64 {
+        match mass {
+            0 => mass,
+            _ => mass + self_compensating_fuel_mass((mass / 3).saturating_sub(2)),
+        }
     }
-    Ok(acc)
+
+    iter.fold(0, |acc, value| {
+        acc + self_compensating_fuel_mass((value / 3).saturating_sub(2))
+    })
 }

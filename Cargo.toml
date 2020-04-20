@@ -4,9 +4,9 @@ categories = []
 edition = "2018"
 keywords = []
 license = "MIT OR Apache-2.0"
-name = "aoc2019"
+name = "aoc_2019"
 readme = "README.md"
-repository = "https://github.com/u007d/aoc2019"
+repository = "https://github.com/u007d/aoc_2019"
 version = "0.1.0"
 
 [dependencies]

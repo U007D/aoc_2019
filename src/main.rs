@@ -12,21 +12,21 @@
     clippy::option_unwrap_used,
     clippy::result_unwrap_used
 )]
-
-use structopt::StructOpt;
-
-use aoc2019::{Args, Result};
-use option_ext::OptionExt;
-
 // Uncomment before ship to reconcile use of possibly redundant crates, debug remnants, missing license files and more
 //#![warn(clippy::cargo, clippy::restriction, missing_docs, warnings)]
 //#![deny(warnings)]
+
+use structopt::StructOpt;
+
+use aoc_2019::{Args, Result};
+use option_ext::OptionExt;
+
 mod option_ext;
 
 fn main() -> Result<()> {
     let args = Args::from_args();
-    let res = aoc2019::aoc(args.day, args.input_data_file.try_into()?)?;
-    println!("Day 1-part 1: {}, part 2: {}", res.0, res.1);
+    let res = aoc_2019::aoc(args.day, args.part, args.input_data_file.try_into()?)?;
+    println!("Day {}-part {} result: {}", args.day, args.part, res);
 
     Ok(())
 }

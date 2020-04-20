@@ -1,6 +1,6 @@
 use crate::{Error, Result};
 
-use super::fuel_for_mass;
+use super::fuel_for_rocket_mass;
 
 #[cfg(test)]
 mod unit_tests;
@@ -12,6 +12,8 @@ where
 {
     input
         .into_iter()
-        .try_fold(0_u32, |acc, value| acc.checked_add(fuel_for_mass(value)))
+        .try_fold(0_u32, |acc, value| {
+            acc.checked_add(fuel_for_rocket_mass(value))
+        })
         .ok_or_else(|| Error::Overflow)
 }

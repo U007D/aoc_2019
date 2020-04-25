@@ -59,7 +59,7 @@ fn aoc__with_invalid_input_returns_error() {
 
     // then
     assert!(match res {
-        Err(Error::AttemptedToParseNonNumericString(_)) => true,
+        Err(Error::FailedStringParse(_)) => true,
         _ => false,
     });
 }

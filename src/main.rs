@@ -26,7 +26,7 @@ mod option_ext;
 fn main() -> Result<()> {
     let args = Args::from_args();
     let res = aoc_2019::aoc(args.day, args.part, args.input_data_file.try_into()?)?;
-    println!("Day {}-part {} result: {}", args.day, args.part, res);
+    println!("Day {}-part {} result: {:?}", args.day, args.part, res);
 
     Ok(())
 }

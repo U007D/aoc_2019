@@ -1,4 +1,9 @@
-#![allow(non_snake_case, clippy::option_unwrap_used, clippy::result_unwrap_used)]
+#![allow(
+    non_snake_case,
+    clippy::option_unwrap_used,
+    clippy::result_unwrap_used,
+    clippy::wildcard_imports
+)]
 
 use super::*;
 
@@ -38,7 +43,7 @@ fn aoc__with_valid_day_returns_ok() {
     let day = 1;
     let part = 1;
     let input: BufReader<Box<dyn Read>> = BufReader::new(Box::new(std::io::empty()));
-    let expected_result = Ok(0);
+    let expected_result = Ok(AocReturn::from(0));
 
     // when
     let res = aoc(day, part, input);
@@ -72,8 +77,8 @@ fn aoc__changing_part_dispatches_to_distinct_functions() {
     let part_2 = 2;
     let input_1: BufReader<Box<dyn Read>> = BufReader::new(Box::new(&b"100"[..]));
     let input_1_again: BufReader<Box<dyn Read>> = BufReader::new(Box::new(&b"100"[..]));
-    let expected_result_1 = Ok(31);
-    let expected_result_2 = Ok(39);
+    let expected_result_1 = Ok(AocReturn::from(31));
+    let expected_result_2 = Ok(AocReturn::from(39));
 
     // when
     let res_1 = aoc(day, part_1, input_1);

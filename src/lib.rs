@@ -24,7 +24,7 @@
 
 use std::io::{BufReader, Read};
 
-pub use aoc_result::AocResult;
+pub use aoc_result::AocReturn;
 pub use args::Args;
 pub use error::Error;
 use exercises::day_01;
@@ -42,7 +42,7 @@ pub type Result<T, E = Error> = std::result::Result<T, E>;
 /// This is the main library entry-point.  This function preps the input data and dispatches the
 /// data to the correct function based on `day` and `part` for processing, returning the result
 /// to the caller.
-pub fn aoc(day: usize, part: usize, buf_reader: BufReader<Box<dyn Read>>) -> Result<AocResult> {
+pub fn aoc(day: usize, part: usize, buf_reader: BufReader<Box<dyn Read>>) -> Result<AocReturn> {
     match day {
         1 => match part {
             1 => day_01::part_1(buf_reader).map(|v| v.into()),
